@@ -1,0 +1,8 @@
+# Files and folders of my project
+wsdl/
+
+# Eclipse
+.buildpath
+.project
+.settings/
+
