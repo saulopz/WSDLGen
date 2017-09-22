@@ -8,16 +8,14 @@ $wsdl = new WSDLGen();
 
 function sum($a, $b)
 {
-	return $a + $b;
+    return $a + $b;
 }
 
-$wsdl->operation("sum", array (
-		'a' => 'xsd:string',
-		'b' => 'xsd:string' 
-), array (
-		'return' => 'xsd:string' 
+$wsdl->operation("sum", array(
+    'a' => 'xsd:string',
+    'b' => 'xsd:string'
+), array(
+    'return' => 'xsd:string'
 ), 'encoded', "Sum of two values");
 
 $wsdl->dump();
-
-?>
