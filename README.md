@@ -1,7 +1,7 @@
 # WSDLGen
 
 **Created by Saulo Popov Zambiasi**.
-**Version 20170713**.
+**Version 20180509**.
 
 WSDLGen is a simple generator of wsdl file for PHP. This software and it's source code are available under BSD (3-clause) license. I create this tool as a simple solution for my own projects.
 
