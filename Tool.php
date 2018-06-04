@@ -21,6 +21,7 @@ $LOCAL = getLocal($SCRIPT_FILENAME);
 
 function getFileNameFromURI($uri)
 {
+    $out = "";
     $i = strlen($uri) - 1;
     $out = "";
     while (($uri[$i] != '/') && ($i > 0)) {

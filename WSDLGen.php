@@ -46,7 +46,9 @@ class WSDLGen
         ));
         if (count($this->operations) != 0) {
             reset($this->operations);
-            foreach($this->operations as $name => $value) {
+            // DEPRECATED
+            //while (list ($name, $value) = each($this->operations)) {
+            foreach ($this->operations as $name => $value) {
                 $this->server->addFunction($value->name);
             }
         }
@@ -70,6 +72,7 @@ class WSDLGen
         for ($i = 0; $i < count($this->operations); $i++) {
             $wsdl .= "\t<wsdl:message name=\"" . $this->operations[$i]->name . "Response\">\n";
             reset($this->operations[$i]->parmOut);
+            //while (list ($name, $value) = each($this->operations[$i]->parmOut)) {
             foreach($this->operations[$i]->parmOut as $name => $value) {
                 $wsdl .= "\t\t<wsdl:part name=\"" . $name . "\" type=\"" . $value . "\" />\n";
             }
@@ -80,7 +83,8 @@ class WSDLGen
         for ($i = 0; $i < count($this->operations); $i++) {
             $wsdl .= "\t<wsdl:message name=\"" . $this->operations[$i]->name . "Request\">\n";
             reset($this->operations[$i]->parmIn);
-            foreach ($this->operations[$i]->parmIn as $name => $value) {
+            //while (list ($name, $value) = each($this->operations[$i]->parmIn)) {
+            foreach($this->operations[$i]->parmIn as $name => $value) {
                 $wsdl .= "\t\t<wsdl:part name=\"" . $name . "\" type=\"" . $value . "\" />\n";
             }
             $wsdl .= "\t</wsdl:message>\n\n";
@@ -88,11 +92,13 @@ class WSDLGen
 
         // portType
         $wsdl .= "\t<wsdl:portType name=\"" . $this->wsName . "\">\n";
+        //while (list ($name, $value) = each($this->operations)) {
         foreach($this->operations as $name => $value) {
             $wsdl .= "\t\t<wsdl:operation name=\"" . $value->name . "\" parameterOrder=\"";
             $first = true;
             reset($value->parmIn);
-            foreach ($value->parmIn as $n => $v) {
+            //while (list ($n, $v) = each($value->parmIn)) {
+            foreach($value->parmIn as $n => $v) {
                 if ($first) {
                     $wsdl .= $n;
                     $first = false;
@@ -112,7 +118,8 @@ class WSDLGen
         $wsdl .= "\t\t<wsdlsoap:binding style=\"rpc\" transport=\"http://schemas.xmlsoap.org/soap/http\" />\n\n";
 
         reset($this->operations);
-        foreach ($this->operations as $name => $value) {
+        //while (list ($name, $value) = each($this->operations)) {
+        foreach($this->operations as $name => $value) {
             $wsdl .= "\t\t<wsdl:operation name=\"" . $value->name . "\">\n";
             $wsdl .= "\t\t\t<wsdlsoap:operation soapAction=\"urn:" . $this->wsName . "#" . $value->name . "\" />\n";
             $wsdl .= "\t\t\t<wsdl:input name=\"" . $value->name . "Request\">\n";
